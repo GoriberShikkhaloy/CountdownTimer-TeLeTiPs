@@ -25,15 +25,15 @@ stoptimer = False
 
 TELETIPS_MAIN_MENU_BUTTONS = [
             [
-                InlineKeyboardButton('❓ HELP', callback_data="HELP_CALLBACK")
+                InlineKeyboardButton('❓ হেল্প', callback_data="HELP_CALLBACK")
             ],
             [
-                InlineKeyboardButton('👥 SUPPORT', callback_data="GROUP_CALLBACK"),
-                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/teletipsofficialchannel'),
-                InlineKeyboardButton('👨‍💻 CREATOR', url='https://t.me/teIetips')
+                InlineKeyboardButton('👥 সাপোর্ট', callback_data="GROUP_CALLBACK"),
+                InlineKeyboardButton('📣 চ্যানেল', url='https://t.me/Edu_Mentors'),
+                InlineKeyboardButton('👨‍💻 প্রস্তুতকারী', url='https://t.me/Edu_Mentors')
             ],
             [
-                InlineKeyboardButton('➕ CREATE YOUR BOT ➕', callback_data="TUTORIAL_CALLBACK")
+                InlineKeyboardButton('➕ আপনি নিজে তৈরী করতে... ➕', callback_data="TUTORIAL_CALLBACK")
             ]
         ]
 
@@ -52,7 +52,7 @@ async def callback_query(client: Client, query: CallbackQuery):
     if query.data=="HELP_CALLBACK":
         TELETIPS_HELP_BUTTONS = [
             [
-                InlineKeyboardButton("⬅️ BACK", callback_data="START_CALLBACK")
+                InlineKeyboardButton("⬅️ ফিরুন", callback_data="START_CALLBACK")
             ]
             ]
         reply_markup = InlineKeyboardMarkup(TELETIPS_HELP_BUTTONS)
@@ -67,10 +67,10 @@ async def callback_query(client: Client, query: CallbackQuery):
     elif query.data=="GROUP_CALLBACK":
         TELETIPS_GROUP_BUTTONS = [
             [
-                InlineKeyboardButton("TeLe TiPs Chat [EN]", url="https://t.me/teletipsofficialontopicchat")
+                InlineKeyboardButton("চ্যানেল", url="https://t.me/Edu_Mentors")
             ],
             [
-                InlineKeyboardButton("⬅️ BACK", callback_data="START_CALLBACK"),
+                InlineKeyboardButton("⬅️ ফিরুন", callback_data="START_CALLBACK"),
             ]
             ]
         reply_markup = InlineKeyboardMarkup(TELETIPS_GROUP_BUTTONS)
@@ -85,10 +85,10 @@ async def callback_query(client: Client, query: CallbackQuery):
     elif query.data=="TUTORIAL_CALLBACK":
         TELETIPS_TUTORIAL_BUTTONS = [
             [
-                InlineKeyboardButton("🎥 Video", url="https://youtu.be/nYSrgdIYdTw")
+                InlineKeyboardButton("🎥 ভিডিও", url="https://youtube.com/channel/UCx_5rSPlRMoZqtnvOLBZWDQ")
             ],
             [
-                InlineKeyboardButton("⬅️ BACK", callback_data="START_CALLBACK"),
+                InlineKeyboardButton("⬅️ ফিরুন", callback_data="START_CALLBACK"),
             ]
             ]
         reply_markup = InlineKeyboardMarkup(TELETIPS_TUTORIAL_BUTTONS)
@@ -103,15 +103,15 @@ async def callback_query(client: Client, query: CallbackQuery):
     elif query.data=="START_CALLBACK":
         TELETIPS_START_BUTTONS = [
             [
-                InlineKeyboardButton('❓ HELP', callback_data="HELP_CALLBACK")
+                InlineKeyboardButton('❓ হেল্প', callback_data="HELP_CALLBACK")
             ],
             [
-                InlineKeyboardButton('👥 SUPPORT', callback_data="GROUP_CALLBACK"),
-                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/teletipsofficialchannel'),
-                InlineKeyboardButton('👨‍💻 CREATOR', url='https://t.me/teIetips')
+                InlineKeyboardButton('👥 সাপোর্ট', callback_data="GROUP_CALLBACK"),
+                InlineKeyboardButton('📣 চ্যানেল', url='https://t.me/Edu_Mentors'),
+                InlineKeyboardButton('👨‍💻 প্রস্তুতকারী', url='https://t.me/Edu_Mentors')
             ],
             [
-                InlineKeyboardButton('➕ CREATE YOUR BOT ➕', callback_data="TUTORIAL_CALLBACK")
+                InlineKeyboardButton('➕ আপনি নিজে তৈরী করতে... ➕', callback_data="TUTORIAL_CALLBACK")
             ]
         ]
         reply_markup = InlineKeyboardMarkup(TELETIPS_START_BUTTONS)
@@ -128,11 +128,11 @@ async def set_timer(client, message):
     global stoptimer
     try:
         if message.chat.id>0:
-            return await message.reply('⛔️ Try this command in a **group chat**.')
+            return await message.reply('⛔️ গ্রুপে কমান্ড দিন')
         elif not (await client.get_chat_member(message.chat.id,message.from_user.id)).privileges:
-            return await message.reply('👮🏻‍♂️ Sorry, **only admins** can execute this command.')    
+            return await message.reply('👮🏻‍♂️ দুঃখিত, শুধুমাত্র **অ্যাডমিন** এই কমান্ড দেয়ার ক্ষমতা রাখে')    
         elif len(message.command)<3:
-            return await message.reply('❌ **Incorrect format.**\n\n✅ Format should be like,\n<code> /set seconds "event"</code>\n\n**Example**:\n <code>/set 10 "10 seconds countdown"</code>')    
+            return await message.reply('❌ **ভূল ফরম্যাট**\n\n✅ এভাবে দেয়া উচিত,\n<code> /set সময় (সেকেন্ডে) "বিষয়ের নাম"</code>\n\n**যেমন**:\n <code>/set 10 "১০ সেকেন্ড কাউন্টডাউন" (ইংরেজিতে)</code>')    
         else:
             user_input_time = int(message.command[1])
             user_input_event = str(message.command[2])
@@ -146,7 +146,7 @@ async def set_timer(client, message):
                     finish_countdown = await get_user_input_time.edit(Countdown_TeLe_TiPs)
                     await asyncio.sleep(1)
                     user_input_time -=1
-                await finish_countdown.edit("🚨 Beep! Beep!! **TIME'S UP!!!**")
+                await finish_countdown.edit("🚨 টুং! টুং!! বিপ! বিপ!!! **সময় হয়ে গেছে!!!**")
             elif 10<user_input_time<60:
                 while user_input_time>0 and not stoptimer:
                     s=user_input_time%60
@@ -154,7 +154,7 @@ async def set_timer(client, message):
                     finish_countdown = await get_user_input_time.edit(Countdown_TeLe_TiPs)
                     await asyncio.sleep(3)
                     user_input_time -=3
-                await finish_countdown.edit("🚨 Beep! Beep!! **TIME'S UP!!!**")
+                await finish_countdown.edit("🚨 টুং! টুং!! বিপ! বিপ!!! **সময় হয়ে গেছে!!!**")
             elif 60<=user_input_time<3600:
                 while user_input_time>0 and not stoptimer:
                     m=user_input_time%3600//60
@@ -163,7 +163,7 @@ async def set_timer(client, message):
                     finish_countdown = await get_user_input_time.edit(Countdown_TeLe_TiPs)
                     await asyncio.sleep(3)
                     user_input_time -=3
-                await finish_countdown.edit("🚨 Beep! Beep!! **TIME'S UP!!!**")
+                await finish_countdown.edit("🚨 টুং! টুং!! বিপ! বিপ!!! **সময় হয়ে গেছে!!!**")
             elif 3600<=user_input_time<86400:
                 while user_input_time>0 and not stoptimer:
                     h=user_input_time%(3600*24)//3600
@@ -173,7 +173,7 @@ async def set_timer(client, message):
                     finish_countdown = await get_user_input_time.edit(Countdown_TeLe_TiPs)
                     await asyncio.sleep(7)
                     user_input_time -=7
-                await finish_countdown.edit("🚨 Beep! Beep!! **TIME'S UP!!!**")
+                await finish_countdown.edit("🚨 টুং! টুং!! বিপ! বিপ!!! **সময় হয়ে গেছে!!!**")
             elif user_input_time>=86400:
                 while user_input_time>0 and not stoptimer:
                     d=user_input_time//(3600*24)
@@ -184,9 +184,9 @@ async def set_timer(client, message):
                     finish_countdown = await get_user_input_time.edit(Countdown_TeLe_TiPs)
                     await asyncio.sleep(9)
                     user_input_time -=9
-                await finish_countdown.edit("🚨 Beep! Beep!! **TIME'S UP!!!**")
+                await finish_countdown.edit("🚨 টুং! টুং!! বিপ! বিপ!!! **সময় হয়ে গেছে!!!**")
             else:
-                await get_user_input_time.edit(f"🤷🏻‍♂️ I can't countdown from {user_input_time}")
+                await get_user_input_time.edit(f"🤷🏻‍♂️ দুঃখিত, আমি {user_input_time} এই সময় থেকে কাউন্টডাউন করতে পারব না")
                 await get_user_input_time.unpin()
     except FloodWait as e:
         await asyncio.sleep(e.value)
@@ -197,13 +197,13 @@ async def stop_timer(Client, message):
     try:
         if (await bot.get_chat_member(message.chat.id,message.from_user.id)).privileges:
             stoptimer = True
-            await message.reply('🛑 Countdown stopped.')
+            await message.reply('🛑 কাউন্টডাউন থামানো হয়েছে।')
         else:
-            await message.reply('👮🏻‍♂️ Sorry, **only admins** can execute this command.')
+            await message.reply('👮🏻‍♂️ দুঃখিত, শুধুমাত্র **অ্যাডমিন** এই কমান্ড দেয়ার ক্ষমতা রাখে')
     except FloodWait as e:
         await asyncio.sleep(e.value)
 
-print("Countdown Timer is alive!")
+print("কাউন্টডাউন চলছে.....!!!")
 bot.run()
 
-#Copyright ©️ 2021 TeLe TiPs. All Rights Reserved
+#Copyright ©️ 2021 EduMentors. All Rights Reserved
